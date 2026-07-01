@@ -1,0 +1,19 @@
+# virtual environment
+venv/
+env/
+.venv/
+
+# python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# environment variables (will matter once you add MongoDB connection string in Phase 3)
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

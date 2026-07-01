@@ -1,0 +1,65 @@
+/* app/globals.css */
+
+/* Tailwind's three layers — keep these at the top, always */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   NEERAKRITI — BRAND COLOR SYSTEM
+   All colors are defined here as CSS variables.
+   Light mode is the default (:root).
+   Dark mode activates when data-theme="dark" is set
+   on the <html> element (done via ThemeToggle.js).
+   ===================================================== */
+
+:root {
+  /* The four base colors from the Neerakriti logo */
+  --bg:       #F2ECDF;   /* Cream/ivory — page background */
+  --ink:      #7A6354;   /* Warm taupe-brown — body text, borders */
+  --accent:   #7C8C73;   /* Dusty sage green — CTAs, highlights */
+  --rose:     #C99B89;   /* Dusty rose/blush — tags, secondary accents */
+
+  /* Derived tokens built from the base palette */
+  --card-bg:  #FAF6EF;                      /* Slightly lighter cream for cards */
+  --border:   rgba(122, 99, 84, 0.2);       /* Semi-transparent taupe for borders */
+}
+
+/* Dark mode palette — same four hues, adjusted for dark backgrounds */
+[data-theme="dark"] {
+  --bg:       #2C2118;   /* Deep brown/charcoal */
+  --ink:      #F2ECDF;   /* Cream becomes the text color */
+  --accent:   #9AAF91;   /* Sage at higher lightness (readable on dark bg) */
+  --rose:     #C99B89;   /* Rose stays the same */
+  --card-bg:  #3A2D22;   /* Slightly lighter dark for card surfaces */
+  --border:   rgba(242, 236, 223, 0.15);
+}
+
+/* =====================================================
+   BASE STYLES
+   ===================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  /* Smooth transition when toggling between light and dark */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Headings use the serif display font (loaded via next/font in layout.js) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant, Georgia, serif);
+}
+
+/* Body text uses Inter (also loaded via next/font) */
+body, p, span, a, button, input {
+  font-family: var(--font-inter, system-ui, sans-serif);
+}
+.footer-card:hover {
+  opacity: 0.6;
+}
