@@ -1,38 +1,52 @@
 // app/page.js
-// This is a Server Component — it runs on the server.
-// No hooks, no 'use client' — we can import data directly.
+// -----------
+// Homepage — a Server Component (runs on the server, not in the browser).
+// 
+// WHAT CHANGED IN PHASE 3:
+//   - Removed "import mockProducts" — we don't read from the local file anymore
+//   - All data now comes from the FastAPI backend via fetch()
+//   - URLs updated to match the actual catalog.py routes
+//   - All product.id changed to product._id (MongoDB's field name)
 
-import mockProducts from '../lib/mockProducts'
 import ProductCard from './components/ProductCard'
 import Link from 'next/link'
 
-async function getNewArrivals() {
-  try {
-    const res = await fetch("http://localhost:8000/products/new", { cache: "no-store" });
-    if (!res.ok) return [];
-    return res.json();
-  } catch {
-    return []; // if the API is down, show empty section instead of crashing
-  }
-}
 
-async function getBestSellers() {
+// ---- Data fetching functions ----
+// These run on the server before the page HTML is built.
+// Each one calls a different backend endpoint.
+// { cache: "no-store" } means "always get fresh data, don't cache"
+// The try/catch means if the backend is down, we show an empty section
+// instead of crashing the whole page.
+
+async function getNewlyAdded() {
   try {
-    const res = await fetch("http://localhost:8000/products/best-sellers", { cache: "no-store" });
+    const res = await fetch("http://localhost:8000/catalog/products/newly-added?limit=4", {
+      cache: "no-store",
+    });
     if (!res.ok) return [];
     return res.json();
   } catch {
     return [];
   }
 }
+
+async function getBestSellers() {
+  try {
+    const res = await fetch("http://localhost:8000/catalog/products/tag/Best Seller", {
+      cache: "no-store",
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
+}
+
+
 export default async function HomePage() {
-
-  // Derive "Newly Added" — sort all products by createdAt, take the 4 most recent
-  const newlyAdded = [...mockProducts]
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 4)
-
-  const newArrivals = await getNewArrivals();
+  // Fetch data from the backend — these run in parallel on the server
+  const newlyAdded = await getNewlyAdded();
   const bestSellers = await getBestSellers();
 
   return (
@@ -43,7 +57,6 @@ export default async function HomePage() {
         className="px-6 md:px-16 py-20 flex flex-col items-center text-center"
         style={{ backgroundColor: 'var(--bg)' }}
       >
-        {/* Hero image placeholder — replace with real product photo in Phase 4 */}
         <div
           className="w-full max-w-3xl aspect-video rounded-2xl mb-10 flex items-center justify-center"
           style={{ backgroundColor: 'var(--card-bg)', border: '2px dashed var(--border)' }}
@@ -59,21 +72,21 @@ export default async function HomePage() {
         <p className="text-lg mb-8 max-w-lg" style={{ color: 'var(--ink)', opacity: 0.75 }}>
           Every piece hand-painted, one dot at a time.
         </p>
- <Link
-  href="/products"
-  style={{
-    backgroundColor: 'var(--ink)',
-    color: 'var(--bg)',
-    padding: '0.75rem 2rem',
-    borderRadius: '999px',
-    fontWeight: '600',
-    textDecoration: 'none',
-    display: 'inline-block',  // critical — without this, padding doesn't apply correctly on <a> tags
-    transition: 'opacity 0.2s',
-  }}
->
-  Shop the Collection
-</Link>
+        <Link
+          href="/products"
+          style={{
+            backgroundColor: 'var(--ink)',
+            color: 'var(--bg)',
+            padding: '0.75rem 2rem',
+            borderRadius: '999px',
+            fontWeight: '600',
+            textDecoration: 'none',
+            display: 'inline-block',
+            transition: 'opacity 0.2s',
+          }}
+        >
+          Shop the Collection
+        </Link>
       </section>
 
       {/* ── 2. TRUST SIGNAL ────────────────────────────── */}
@@ -115,7 +128,7 @@ export default async function HomePage() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {bestSellers.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
       </section>
@@ -161,7 +174,6 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        {/* Maker photo placeholder — replace with real photo in Phase 4 */}
         <div
           className="flex-1 max-w-sm w-full aspect-square rounded-2xl flex items-center justify-center"
           style={{ backgroundColor: 'var(--card-bg)', border: '2px dashed var(--border)' }}
@@ -180,7 +192,6 @@ export default async function HomePage() {
         <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: 'var(--ink)' }}>
           Follow Along on Instagram
         </h2>
-        {/* 6 placeholder squares — real embed comes in Phase 4 */}
         <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
           {[...Array(6)].map((_, i) => (
             <div
@@ -198,8 +209,6 @@ export default async function HomePage() {
       </section>
 
       {/* ── 8. NOTIFY ME ───────────────────────────────── */}
-      {/* This becomes <NotifyForm /> (a Client Component) in Phase 4.
-          For now it's static markup — no event handlers needed yet. */}
       <section className="px-6 md:px-16 py-16 text-center">
         <h2 className="text-3xl font-bold mb-3" style={{ color: 'var(--ink)' }}>
           Never Miss a New Piece
