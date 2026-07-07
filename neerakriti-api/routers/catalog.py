@@ -46,44 +46,55 @@ def serialize_product(doc):
 
 @router.get("/products")
 async def get_all_products(
-    category: str | None = Query(None),  # ?category=Wall+Decor (optional)
-    tag: str | None = Query(None),        # ?tag=Best+Seller (optional)
-    sort_by: str | None = Query(None),    # ?sort_by=price_asc or price_desc (optional)
+    category: str | None = Query(None),    # ?category=Wall+Decor
+    tag: str | None = Query(None),          # ?tag=Best+Seller
+    sort_by: str | None = Query(None),      # ?sort_by=price_asc / price_desc / newest
+    search: str | None = Query(None),       # ?search=chakra  ← NEW
 ):
-    """Return all products, optionally filtered by category or tag."""
+    """Return products, optionally filtered by category, tag, or search term."""
 
-    # Start with an empty filter — {} means "match everything"
     query = {}
 
-    # If the frontend sent ?category=Wall+Decor, add it to the filter.
-    # MongoDB will only return products where category == "Wall Decor"
+    # ---- Category filter (same as before) ----
     if category:
         query["category"] = category
 
-    # If the frontend sent ?tag=Best+Seller, add it to the filter.
-    # MongoDB is smart about arrays — if tags is ["Best Seller", "Diwali"],
-    # and we search for "Best Seller", it matches automatically.
-    # You don't need to write "is Best Seller inside the tags array?" — 
-    # MongoDB handles that for you.
+    # ---- Tag filter (same as before) ----
     if tag:
         query["tags"] = tag
 
-    # Run the query. .find() returns a "cursor" (like a bookmark into the results).
-    # .to_list(length=100) reads up to 100 documents from that cursor into a Python list.
+    # ---- Search filter (NEW) ----
+    # $or means "match if ANY of these conditions are true"
+    # $regex means "match if the field CONTAINS this text" (like SQL's LIKE '%chakra%')
+    # $options: "i" means case-insensitive (so "Chakra", "chakra", "CHAKRA" all match)
+    #
+    # Example: if search = "chakra", this becomes:
+    # { "$or": [
+    #     { "name": { "$regex": "chakra", "$options": "i" } },
+    #     { "description": { "$regex": "chakra", "$options": "i" } },
+    #     { "tags": { "$regex": "chakra", "$options": "i" } }
+    # ]}
+    if search:
+        query["$or"] = [
+            {"name": {"$regex": search, "$options": "i"}},
+            {"description": {"$regex": search, "$options": "i"}},
+            {"tags": {"$regex": search, "$options": "i"}},
+        ]
+
     cursor = products_collection.find(query)
 
-    # Handle sorting if requested
+    # ---- Sorting ----
     if sort_by == "price_asc":
-        cursor = cursor.sort("price", 1)     # 1 means ascending (low → high)
+        cursor = cursor.sort("price", 1)       # cheapest first
     elif sort_by == "price_desc":
-        cursor = cursor.sort("price", -1)    # -1 means descending (high → low)
+        cursor = cursor.sort("price", -1)      # most expensive first
+    elif sort_by == "newest":
+        cursor = cursor.sort("createdAt", -1)  # newest first
+    # If no sort_by is specified, MongoDB returns in insertion order (default)
 
     products = await cursor.to_list(length=100)
 
-    # Convert every product's _id from ObjectId to string before sending
     return [serialize_product(p) for p in products]
-
-
 # ---- Endpoint 2: Get newly added products ----
 # URL: GET /catalog/products/newly-added
 # Optional: ?limit=4 (default is 4)
