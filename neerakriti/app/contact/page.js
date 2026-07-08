@@ -20,7 +20,7 @@ export const metadata = {
 
 export default function ContactPage() {
   // ── WhatsApp number (change this to the real number) ──
-  const whatsappNumber = '919305773954';
+  const whatsappNumber = '918787049939';
   // 👆 Format: country code + number, no spaces, no dashes, no plus sign
   // 91 = India country code. Change 9876543210 to the real number.
 
@@ -77,7 +77,7 @@ export default function ContactPage() {
 
           {/* WhatsApp card */}
           
-            href={`https://wa.me/${whatsappNumber}?text=Hi! I'm reaching out from the Neerakriti website.`}
+            <a href={`https://wa.me/${whatsappNumber}?text=Hi! I'm reaching out from the Neerakriti website.`}
             // 👆 wa.me deep link — opens WhatsApp with a prefilled message.
             // Works on both mobile (opens the app) and desktop (opens WhatsApp Web).
             target="_blank"
@@ -121,7 +121,7 @@ export default function ContactPage() {
 
           {/* Email card */}
           
-            href="mailto:neerakriti@gmail.com"
+            <a href="https://mail.google.com/mail/?view=cm&to=karan15nigam@gmail.com&su=Inquiry%20about%20Neerakriti" target="_blank" rel="noopener noreferrer"
             // 👆 Change this to the real email address
             style={{
               flex: '1 1 250px',

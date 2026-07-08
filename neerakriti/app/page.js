@@ -59,14 +59,12 @@ export default async function HomePage() {
         className="px-6 md:px-16 py-20 flex flex-col items-center text-center"
         style={{ backgroundColor: 'var(--bg)' }}
       >
-        <div
-          className="w-full max-w-3xl aspect-video rounded-2xl mb-10 flex items-center justify-center"
-          style={{ backgroundColor: 'var(--card-bg)', border: '2px dashed var(--border)' }}
-        >
-          <p className="text-sm" style={{ color: 'var(--ink)', opacity: 0.4 }}>
-            Hero image — real product photo goes here
-          </p>
-        </div>
+        <img
+          src="/images/hero.jpeg"
+          alt="Neerakriti — Handmade Dot Mandala Art"
+          className="w-half max-w-4xl rounded-2xl mb-10"
+          style={{ objectFit: 'cover', maxHeight: '450px', width: '100%' }}
+        />
 
         <h1 className="text-4xl md:text-6xl font-bold mb-4" style={{ color: 'var(--ink)' }}>
           Handmade Dot Mandala Art
@@ -80,7 +78,7 @@ export default async function HomePage() {
             backgroundColor: 'var(--ink)',
             color: 'var(--bg)',
             padding: '0.75rem 2rem',
-            borderRadius: '999px',
+            borderRadius: '4px',
             fontWeight: '600',
             textDecoration: 'none',
             display: 'inline-block',
@@ -92,7 +90,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── 2. TRUST SIGNAL ────────────────────────────── */}
-      <div className="py-3 text-center" style={{ backgroundColor: 'var(--accent)' }}>
+      <div className="py-5 text-center" style={{ backgroundColor: 'var(--accent)' }}>
         <p className="text-sm italic" style={{ color: 'white' }}>
           Hand-painted, one dot at a time — by one artist, start to finish.
         </p>
@@ -137,18 +135,18 @@ export default async function HomePage() {
 
       {/* ── 5. SEASONAL BANNER ─────────────────────────── */}
       <section
-        className="px-6 md:px-16 py-20 text-center"
+        className="px-6 md:px-26 py-20 text-center"
         style={{ backgroundColor: 'var(--rose)' }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: 'white' }}>
+        <h1 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: 'white' }}>
           Diwali &amp; Wedding Collections
-        </h2>
+        </h1>
         <p className="mb-8 max-w-md mx-auto" style={{ color: 'white', opacity: 0.9 }}>
           Curated gift hampers and personalised pieces for every celebration.
         </p>
         <Link
           href="/products?tag=Diwali"
-          className="px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity"
+          className="px-8 py-3 font-semibold hover:opacity-90 transition-opacity textDecoration-none"
           style={{ backgroundColor: 'white', color: 'var(--rose)' }}
         >
           Shop Festive Gifts
@@ -156,9 +154,9 @@ export default async function HomePage() {
       </section>
 
       {/* ── 6. MEET THE MAKER ──────────────────────────── */}
-      <section className="px-6 md:px-16 py-16 flex flex-col md:flex-row items-center gap-12">
+      <section className="px-10 md:px-16 py-16 flex flex-col md:flex-row items-center gap-12">
         <div className="flex-1">
-          <h2 className="text-3xl font-bold mb-5" style={{ color: 'var(--ink)' }}>
+          <h2 className="text-3xl font-bold mb-7" style={{ color: 'var(--ink)' }}>
             Meet the Maker
           </h2>
           <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--ink)', opacity: 0.85 }}>
@@ -170,7 +168,7 @@ export default async function HomePage() {
           <Link
             href="/about"
             className="font-semibold underline"
-            style={{ color: 'var(--accent)' }}
+            style={{ color: 'var(--ink)',textDecoration: 'none' }}
           >
             Read the full story →
           </Link>

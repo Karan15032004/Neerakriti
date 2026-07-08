@@ -30,7 +30,7 @@ export default function ThemeToggle() {
       style={{
         background: 'none',
         border: '1px solid var(--ink)',
-        borderRadius: '999px',
+        borderRadius: '2px',
         padding: '0.4rem 0.75rem',
         cursor: 'pointer',
         fontSize: '0.85rem',
