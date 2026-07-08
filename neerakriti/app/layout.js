@@ -39,7 +39,7 @@ const themeScript = `
 export default function RootLayout({ children }) {
   return (
     // The font variables are attached to <html> so all children can access them
-    <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${cormorant.variable}`}>
       <body>
         {/* Theme flash fix — must be the very first thing inside <body> */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

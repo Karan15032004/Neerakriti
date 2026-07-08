@@ -4,7 +4,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-
+import ThemeToggle from './ThemeToggle';
 export default function Navbar() {
   return (
     <nav
@@ -55,7 +55,7 @@ export default function Navbar() {
           }}
         />
 
-        {/* ThemeToggle component goes here in Phase 4 */}
+       <ThemeToggle />
       </div>
     </nav>
   )

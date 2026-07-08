@@ -12,6 +12,7 @@
 // generateMetadata runs on the server and sets the <title> and meta description
 // for each product page individually — this is how Next.js handles per-page SEO.
 // Google sees "Seven Chakras Mandala Plate — Neerakriti" instead of a generic title.
+import WallPreview from '../../components/WallPreview';
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const res = await fetch(
@@ -53,6 +54,32 @@ export default async function ProductDetailPage({ params }) {
 
   return (
     <main style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto" }}>
+      {/* ── Product Image ── */}
+<div
+  className="w-full aspect-square rounded-2xl mb-8 flex items-center justify-center"
+  style={{
+    backgroundColor: 'var(--card-bg)',
+    border: '2px dashed var(--border)',
+    maxWidth: '500px',
+  }}
+>
+  {product.images && product.images.length > 0 ? (
+    <img
+      src={product.images[0]}
+      alt={product.name}
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        borderRadius: '1rem',
+      }}
+    />
+  ) : (
+    <p className="text-sm" style={{ color: 'var(--ink)', opacity: 0.4 }}>
+      Product image coming soon
+    </p>
+  )}
+</div>
       {/* Product name */}
       <h1
         className="text-3xl font-bold mb-2"
@@ -157,6 +184,13 @@ export default async function ProductDetailPage({ params }) {
           </a>
         )}
       </div>
+      {/* ── Wall Hanging Preview ── */}
+      {product.images && product.images.length > 1 && (
+        <WallPreview
+          productImage={product.images[1]}
+          productName={product.name}
+        />
+      )}
     </main>
   );
 }

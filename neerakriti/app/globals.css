@@ -13,28 +13,34 @@
    on the <html> element (done via ThemeToggle.js).
    ===================================================== */
 
-:root {
-  /* The four base colors from the Neerakriti logo */
-  --bg:       #F2ECDF;   /* Cream/ivory — page background */
-  --ink:      #7A6354;   /* Warm taupe-brown — body text, borders */
-  --accent:   #7C8C73;   /* Dusty sage green — CTAs, highlights */
-  --rose:     #C99B89;   /* Dusty rose/blush — tags, secondary accents */
-
-  /* Derived tokens built from the base palette */
-  --card-bg:  #FAF6EF;                      /* Slightly lighter cream for cards */
-  --border:   rgba(122, 99, 84, 0.2);       /* Semi-transparent taupe for borders */
+/* ── LIGHT THEME (default) ── */
+:root,
+[data-theme="light"] {
+  --bg: #F2ECDF;
+  --ink: #7A6354;
+  --accent: #7C8C73;
+  --rose: #C99B89;
+  --card-bg: #FAF6EE;
+  --border: #D6CFC3;
+  --color-cream: #F2ECDF;
+  --color-taupe: #7A6354;
+  --color-sage: #7C8C73;
+  --color-rose: #C99B89;
 }
 
-/* Dark mode palette — same four hues, adjusted for dark backgrounds */
+/* ── DARK THEME ── */
 [data-theme="dark"] {
-  --bg:       #2C2118;   /* Deep brown/charcoal */
-  --ink:      #F2ECDF;   /* Cream becomes the text color */
-  --accent:   #9AAF91;   /* Sage at higher lightness (readable on dark bg) */
-  --rose:     #C99B89;   /* Rose stays the same */
-  --card-bg:  #3A2D22;   /* Slightly lighter dark for card surfaces */
-  --border:   rgba(242, 236, 223, 0.15);
+  --bg: #2C2420;
+  --ink: #F2ECDF;
+  --accent: #A3B596;
+  --rose: #D4A898;
+  --card-bg: #3A322C;
+  --border: #524840;
+  --color-cream: #2C2420;
+  --color-taupe: #F2ECDF;
+  --color-sage: #A3B596;
+  --color-rose: #D4A898;
 }
-
 /* =====================================================
    BASE STYLES
    ===================================================== */

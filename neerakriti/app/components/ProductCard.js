@@ -28,7 +28,7 @@ export default function ProductCard({ product }) {
       >
         {/* Image area */}
         <div
-          className="aspect-square flex items-center justify-center"
+          className="aspect-square flex items-center justify-center  overflow-hidden"
           style={{ backgroundColor: "var(--border)" }}
         >
           {product.images && product.images.length > 0 ? (

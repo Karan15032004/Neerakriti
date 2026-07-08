@@ -7,9 +7,11 @@
 //   - All data now comes from the FastAPI backend via fetch()
 //   - URLs updated to match the actual catalog.py routes
 //   - All product.id changed to product._id (MongoDB's field name)
-
+import NotifyForm from './components/NotifyForm'
+import FeedbackForm from './components/FeedbackForm'
 import ProductCard from './components/ProductCard'
 import Link from 'next/link'
+import InstagramEmbed from './components/InstagramEmbed'
 
 
 // ---- Data fetching functions ----
@@ -185,60 +187,34 @@ export default async function HomePage() {
       </section>
 
       {/* ── 7. INSTAGRAM PLACEHOLDER ───────────────────── */}
+   {/* ── 7. INSTAGRAM FEED ──────────────────────────── */}
       <section
         className="px-6 md:px-16 py-14"
         style={{ backgroundColor: 'var(--card-bg)' }}
       >
-        <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: 'var(--ink)' }}>
-          Follow Along on Instagram
-        </h2>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="aspect-square rounded-lg flex items-center justify-center text-xs"
-              style={{ backgroundColor: 'var(--border)', color: 'var(--ink)', opacity: 0.5 }}
-            >
-              Post {i + 1}
-            </div>
-          ))}
-        </div>
-        <p className="text-center mt-4 text-xs" style={{ color: 'var(--ink)', opacity: 0.5 }}>
-          Instagram embed — Phase 4
-        </p>
+        <InstagramEmbed />
       </section>
 
       {/* ── 8. NOTIFY ME ───────────────────────────────── */}
-      <section className="px-6 md:px-16 py-16 text-center">
-        <h2 className="text-3xl font-bold mb-3" style={{ color: 'var(--ink)' }}>
-          Never Miss a New Piece
-        </h2>
-        <p className="mb-8" style={{ color: 'var(--ink)', opacity: 0.75 }}>
-          Get notified when something new joins the collection.
-        </p>
-        <div className="flex gap-3 justify-center flex-wrap">
-          <input
-            type="email"
-            placeholder="your@email.com"
-            className="px-4 py-3 rounded-lg text-sm w-64 outline-none"
-            style={{
-              backgroundColor: 'var(--card-bg)',
-              border: '1px solid var(--border)',
-              color: 'var(--ink)',
-            }}
-          />
-          <button
-            className="px-6 py-3 rounded-lg font-semibold text-sm hover:opacity-80 transition-opacity"
-            style={{ backgroundColor: 'var(--ink)', color: 'var(--bg)' }}
-          >
-            Notify Me
-          </button>
-        </div>
-        <p className="text-xs mt-3" style={{ color: 'var(--ink)', opacity: 0.45 }}>
-          Form functionality wired up in Phase 4
-        </p>
+      {/* ── 8. NOTIFY ME SIGNUP ── */}
+      <section
+        style={{
+          padding: '4rem 2rem',
+          backgroundColor: 'var(--color-cream)',
+        }}
+      >
+        <NotifyForm />
       </section>
-
+        {/* ── 9. FEEDBACK FORM ── */}
+      <section
+        style={{
+          padding: '4rem 2rem',
+          backgroundColor: 'var(--color-cream)',
+          borderTop: '1px solid var(--color-rose)',
+        }}
+      >
+        <FeedbackForm />
+      </section>
     </div>
   )
 }
