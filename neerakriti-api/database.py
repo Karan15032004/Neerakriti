@@ -7,6 +7,7 @@
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv
+import certifi
 
 # ---- Step 1: Read secrets from .env ----
 # load_dotenv() opens the .env file and loads each line
@@ -25,7 +26,7 @@ DATABASE_NAME = os.getenv("DATABASE_NAME")
 # We create ONE client here, and every request reuses it.
 # We do NOT create a new connection per request — that
 # would be like building a new highway for every car.
-client = AsyncIOMotorClient(MONGODB_URL)
+client = AsyncIOMotorClient(MONGODB_URL, tlsCAFile=certifi.where())
 
 # ---- Step 3: Pick the specific database ----
 # Your Atlas cluster can hold many databases.

@@ -31,7 +31,7 @@ export default function ProductsPage() {
 
   // These are the category options. They match the "category" field in your MongoDB products.
   // When you add new categories later, just add them to this list.
-  const categories = ["Wall Decor", "Photo Frames", "Gift Bundles", "Jharokhas"];
+  const [categories, setCategories] = useState([]);
 
   // ---- Fetch products from the backend ----
   // useEffect runs this function every time search, category, or sortBy changes.
@@ -72,6 +72,25 @@ export default function ProductsPage() {
     // cancel the previous timer and start a new one.
     return () => clearTimeout(timer);
   }, [search, category, sortBy]);
+  // ---- Fetch categories from the backend ----
+  // Runs once when the page first loads.
+  // Pulls the real category list from MongoDB so the filter buttons
+  // always match what's actually in the database.
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const res = await fetch("http://localhost:8000/catalog/categories");
+        if (res.ok) {
+          const data = await res.json();
+          // The backend returns { categories: ["Photo Frames", "Wall Decor", ...] }
+          setCategories(data.categories || []);
+        }
+      } catch (err) {
+        console.error("Failed to fetch categories:", err);
+      }
+    }
+    fetchCategories();
+  }, []);  // empty [] = run only once on page load
 
   return (
     <main style={{ padding: "2rem" }}>

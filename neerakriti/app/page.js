@@ -99,10 +99,10 @@ export default async function HomePage() {
       {/* ── 3. NEWLY ADDED ─────────────────────────────── */}
       <section className="px-6 md:px-16 py-14">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-3xl font-bold" style={{ color: 'var(--ink)' }}>
+          <h1 className="text-3xl font-bold" style={{ color: 'var(--ink)' }}>
             Newly Added
-          </h2>
-          <Link href="/products" className="text-sm underline" style={{ color: 'var(--accent)' }}>
+          </h1>
+          <Link href="/products" className="text-sm underline" style={{ color: 'var(--accent)',textDecoration: 'none' }}>
             View all →
           </Link>
         </div>
@@ -119,10 +119,10 @@ export default async function HomePage() {
         style={{ backgroundColor: 'var(--card-bg)' }}
       >
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-3xl font-bold" style={{ color: 'var(--ink)' }}>
+          <h1 className="text-3xl font-bold" style={{ color: 'var(--ink)' }}>
             Best Sellers
-          </h2>
-          <Link href="/products?tag=Best+Seller" className="text-sm underline" style={{ color: 'var(--accent)' }}>
+          </h1>
+          <Link href="/products?tag=Best+Seller" className="text-sm underline" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
             View all →
           </Link>
         </div>
@@ -156,9 +156,9 @@ export default async function HomePage() {
       {/* ── 6. MEET THE MAKER ──────────────────────────── */}
       <section className="px-10 md:px-16 py-16 flex flex-col md:flex-row items-center gap-12">
         <div className="flex-1">
-          <h2 className="text-3xl font-bold mb-7" style={{ color: 'var(--ink)' }}>
+          <h1 className="text-3xl font-bold mb-7" style={{ color: 'var(--ink)' }}>
             Meet the Maker
-          </h2>
+          </h1>
           <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--ink)', opacity: 0.85 }}>
             Every Neerakriti piece is made by one person — a CS teacher who picks up her
             dotting tools in the evenings and transforms a blank surface into something that
@@ -174,14 +174,14 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <div
-          className="flex-1 max-w-sm w-full aspect-square rounded-2xl flex items-center justify-center"
-          style={{ backgroundColor: 'var(--card-bg)', border: '2px dashed var(--border)' }}
-        >
-          <p className="text-sm text-center px-8" style={{ color: 'var(--ink)', opacity: 0.4 }}>
-            Maker photo goes here
-          </p>
-        </div>
+<div className="flex-1 max-w-sm w-full">
+  <img
+    src="/images/maker.JPEG"
+    alt="The maker — Neerakriti artist"
+    className="w-full rounded-2xl"
+    style={{ objectFit: 'cover', objectPosition: 'top', height: '380px' }}
+  />
+</div>
       </section>
 
       {/* ── 7. INSTAGRAM PLACEHOLDER ───────────────────── */}

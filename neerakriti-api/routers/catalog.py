@@ -114,7 +114,27 @@ async def get_newly_added(limit: int = Query(4)):
 
     return [serialize_product(p) for p in products]
 
+# ---- Endpoint: Get all distinct categories ----
+# URL: GET /catalog/categories
+#
+# This powers the category filter buttons on the catalogue page.
+# Instead of hardcoding ["Wall Decor", "Photo Frames", ...] in the frontend,
+# we pull the real, live list straight from MongoDB. Add a product with a
+# new category tomorrow, and the filter button appears automatically.
+#
+# .distinct("category") is a MongoDB command that returns every UNIQUE
+# value of the "category" field across all products — no duplicates.
+# Example: if 5 products are "Photo Frames", it returns "Photo Frames" once.
 
+@router.get("/categories")
+async def get_categories():
+    """Return a sorted list of all unique product categories."""
+
+    # distinct() gathers every unique "category" value from all products
+    categories = await products_collection.distinct("category")
+
+    # sorted() puts them in alphabetical order so the buttons appear consistently
+    return {"categories": sorted(categories)}
 # ---- Endpoint 3: Get one product by ID ----
 # URL: GET /catalog/products/665a1b2c3d4e5f6g7h8i9j0k
 #

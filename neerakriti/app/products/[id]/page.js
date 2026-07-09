@@ -147,42 +147,48 @@ export default async function ProductDetailPage({ params }) {
       {/* Action buttons — WhatsApp inquiry + Customize */}
       <div className="flex flex-wrap" style={{ gap: "1rem" }}>
         {/* WhatsApp inquiry — shown on ALL products */}
-        <a
-          href={`http://localhost:8000/inquiry/whatsapp/${product._id}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-block",
-            background: "#25D366",
-            color: "white",
-            padding: "0.75rem 1.5rem",
-            borderRadius: "8px",
-            textDecoration: "none",
-            fontWeight: 600,
-          }}
-        >
-          Enquire via WhatsApp
-        </a>
+       
+       {/* WhatsApp inquiry — direct wa.me link, no backend call needed */}
 
-        {/* Customize button — only shown if product.isCustomizable is true */}
-        {product.isCustomizable && (
-          <a
-            href={`http://localhost:8000/inquiry/customize/${product._id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-block",
-              background: "var(--rose)",
-              color: "white",
-              padding: "0.75rem 1.5rem",
-              borderRadius: "8px",
-              textDecoration: "none",
-              fontWeight: 600,
-            }}
-          >
-            Customise This Design
-          </a>
-        )}
+  <a href={`https://wa.me/918787049939?text=${encodeURIComponent(
+    `Hi! I'm interested in "${product.name}" priced at ₹${product.price}. Could you please share more details?`
+  )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    display: "inline-block",
+    background: "#25D366",
+    color: "white",
+    padding: "0.75rem 1.5rem",
+    borderRadius: "8px",
+    textDecoration: "none",
+    fontWeight: 600,
+  }}
+>
+  Enquire via WhatsApp
+</a>
+
+{/* Customize button — only shown if product.isCustomizable is true */}
+{product.isCustomizable && (
+  
+    <a href={`https://wa.me/918787049939?text=${encodeURIComponent(
+      `Hi! I'd like to customise "${product.name}" (₹${product.price}). Could you please guide me through the customisation options?`
+    )}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "inline-block",
+      background: "var(--rose)",
+      color: "white",
+      padding: "0.75rem 1.5rem",
+      borderRadius: "8px",
+      textDecoration: "none",
+      fontWeight: 600,
+    }}
+  >
+    Customise This Design
+  </a>
+)}
       </div>
       {/* ── Wall Hanging Preview ── */}
       {product.images && product.images.length > 1 && (
