@@ -23,7 +23,7 @@ import InstagramEmbed from './components/InstagramEmbed'
 
 async function getNewlyAdded() {
   try {
-    const res = await fetch("http://localhost:8000/catalog/products/newly-added?limit=4", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/catalog/products/newly-added?limit=4`, {
       cache: "no-store",
     });
     if (!res.ok) return [];
@@ -35,7 +35,7 @@ async function getNewlyAdded() {
 
 async function getBestSellers() {
   try {
-    const res = await fetch("http://localhost:8000/catalog/products/tag/Best Seller", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/catalog/products/tag/Best%20Seller`, {
       cache: "no-store",
     });
     if (!res.ok) return [];
@@ -174,13 +174,40 @@ export default async function HomePage() {
           </Link>
         </div>
 
-<div className="flex-1 max-w-sm w-full">
+{/* Before: single image div */}
+{/* <div className="flex-1 max-w-sm w-full"> ... </div> */}
+
+{/* After: two images side by side */}
+{/* Two maker photos — width-driven sizing, no height constraint, no cropping */}
+<div style={{ flex: '0 0 42%', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+
+  {/* Photo 1 */}
   <img
-    src="/images/maker.JPEG"
+    src="/images/maker.jpeg"
     alt="The maker — Neerakriti artist"
-    className="w-full rounded-2xl"
-    style={{ objectFit: 'cover', objectPosition: 'top', height: '380px' }}
+    style={{
+      width: 'calc(50% - 5px)',   /* exactly half the container minus half the gap */
+      height: 'auto',             /* maintains natural aspect ratio — no cropping */
+      borderRadius: '14px',
+      display: 'block',           /* removes the ghost whitespace below inline images */
+      boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
+      objectFit: 'unset',         /* not needed since height is auto, but explicit is clean */
+    }}
   />
+<img
+    src="/images/maker3.jpeg"
+    alt="The maker at the seaside"
+    style={{
+      width: 'calc(50% - 5px)',   /* same as photo 1 — guaranteed equal width */
+      height: 'auto',             /* scales proportionally — fully visible, no scroll */
+      borderRadius: '14px',
+      display: 'block',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
+      objectFit: 'unset', 
+    }}
+  />
+ 
+
 </div>
       </section>
 

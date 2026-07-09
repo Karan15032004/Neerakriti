@@ -76,7 +76,7 @@ export default function Footer() {
           </h3>
           {/* wa.me deep link — replace 91XXXXXXXXXX with the real number in Phase 4 */}
           <a
-            href="https://wa.me/91XXXXXXXXXX"
+            href="https://wa.me/918787049939"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-semibold flex items-center gap-2 hover:opacity-70 transition-opacity"

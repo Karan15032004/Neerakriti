@@ -16,7 +16,7 @@ import WallPreview from '../../components/WallPreview';
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const res = await fetch(
-    `http://localhost:8000/catalog/products/${resolvedParams.id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/catalog/products/${resolvedParams.id}`,
     { cache: "no-store" }
   );
   if (!res.ok) return { title: "Product not found — Neerakriti" };
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
 }
 
 async function getProduct(id) {
-  const res = await fetch(`http://localhost:8000/catalog/products/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/catalog/products/${id}`, {
     cache: "no-store",
   });
   if (!res.ok) return null;

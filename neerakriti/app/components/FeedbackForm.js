@@ -15,7 +15,8 @@ export default function FeedbackForm() {
     setStatus('');
 
     try {
-      const res = await fetch('http://localhost:8000/engagement/feedback', {
+      // ✅
+const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, message }),
@@ -26,10 +27,21 @@ export default function FeedbackForm() {
         setName('');
         setEmail('');
         setMessage('');
-      } else {
-        const data = await res.json();
-        setStatus(data.detail || 'Something went wrong. Please try again.');
-      }
+      // ✅ FIXED
+} else {
+  const data = await res.json();
+
+  // FastAPI's data.detail is EITHER a plain string OR an array of
+  // validation error objects [{type, loc, msg, input}, ...]
+  // React crashes if you try to render an object — so we always extract a string
+  if (typeof data.detail === 'string') {
+    setStatus(data.detail);
+  } else if (Array.isArray(data.detail)) {
+    setStatus(data.detail.map((err) => err.msg).join(', '));
+  } else {
+    setStatus('Something went wrong. Please try again.');
+  }
+}
     } catch (error) {
       setStatus('Could not connect to the server. Please try again later.');
     } finally {

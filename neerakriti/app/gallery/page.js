@@ -8,6 +8,7 @@
 // Server-rendering means Google indexes the page content for SEO.
 
 import Link from 'next/link';
+import GalleryCarousel from '../components/GalleryCarousel';
 
 export const metadata = {
   title: 'Gallery — Neerakriti Exhibitions & Events',
@@ -26,9 +27,13 @@ const galleryItems = [
     title: 'Craft Fair 2024',
     description: 'First public exhibition — 12 pieces displayed',
     tall: true,
-    // 👆 tall: true makes this card taller in the grid (spans 2 rows)
-    // This creates a Pinterest-style masonry effect
     color: 'var(--color-rose)',
+    media: [
+      { type: 'video', src: '/videos/exhibition.mp4' },
+      { type: 'image', src: '/images/craft-fair/craftfair-2.jpeg' },
+      { type: 'image', src: '/images/craft-fair/craftfair-3.jpeg' },
+      // add as many as you want
+    ],
   },
   {
     id: 2,
@@ -36,6 +41,7 @@ const galleryItems = [
     description: 'The signature chakra-themed mandala plates',
     tall: false,
     color: 'var(--color-sage)',
+    image: '/images/sevenchakras/sevenchakras.jpeg', // optional image for this item
   },
   {
     id: 3,
@@ -43,6 +49,7 @@ const galleryItems = [
     description: 'Custom gift hampers for the festive season',
     tall: false,
     color: 'var(--color-taupe)',
+    image:'/images/diwali-rangoli-2.jpeg',
   },
   {
     id: 4,
@@ -50,6 +57,7 @@ const galleryItems = [
     description: 'Mirror frames and decorative pieces for weddings',
     tall: true,
     color: 'var(--color-sage)',
+    image: '/images/photo-frames/photo-frame-2.jpeg',
   },
   {
     id: 5,
@@ -57,13 +65,18 @@ const galleryItems = [
     description: 'Traditional arch-shaped wall art pieces',
     tall: false,
     color: 'var(--color-rose)',
+    image:'/images/jharokha/jharokha1.jpeg',
   },
-  {
+      {
     id: 6,
-    title: 'Work in Progress',
+    title: 'Random Studio Moments',
     description: 'Behind the scenes — the dotting process',
     tall: false,
     color: 'var(--color-taupe)',
+    media: [
+      { type: 'image', src: '/images/random/1.jpeg' },
+      { type: 'image', src: '/images/random/3.jpeg' },
+    ],
   },
 ];
 
@@ -120,26 +133,49 @@ export default function GalleryPage() {
               borderRadius: '12px',
               overflow: 'hidden',
               backgroundColor: item.color,
-              opacity: 0.3,
+              opacity: 1,
               // 👆 Low opacity because these are placeholders.
               // Remove opacity when you add real images.
             }}
           >
             {/* Image placeholder area */}
-            <div
-              style={{
-                height: item.tall ? '380px' : '220px',
-                // 👆 "tall" items are taller — creates visual variety
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.85rem',
-                color: 'var(--color-taupe)',
-              }}
-            >
-              [ Photo placeholder ]
-            </div>
+            {/* Video or image placeholder area */}
+{item.media ? (
+  // ── Instagram-style carousel for cards with multiple media ──
+  <GalleryCarousel
+    media={item.media}
+    height={item.tall ? '380px' : '220px'}
+  />
+) : item.image ? (
+  // ── Single photo ──
+  <img
+    src={item.image}
+    alt={item.title}
+    style={{
+      width: '100%',
+      height: item.tall ? '380px' : '220px',
+      objectFit: 'cover',
+      objectPosition: 'center',
+      display: 'block',
+    }}
+  />
+) : (
+  // ── Placeholder ──
+  <div
+    style={{
+      height: item.tall ? '380px' : '220px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: "'Inter', sans-serif",
+      fontSize: '0.85rem',
+      color: 'var(--color-taupe)',
+      opacity: 0.4,
+    }}
+  >
+    [ Photo coming soon ]
+  </div>
+)}
 
             {/* Caption */}
             <div

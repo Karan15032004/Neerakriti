@@ -77,23 +77,22 @@ export default function AboutPage() {
         </div>
 
         {/* Image placeholder — replace with real photo later */}
-        <div
-          style={{
-            flex: '1 1 300px',
-            minHeight: '350px',
-            backgroundColor: 'var(--color-rose)',
-            borderRadius: '16px',
-            opacity: 0.3,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontFamily: "'Inter', sans-serif",
-            color: 'var(--color-taupe)',
-            fontSize: '0.9rem',
-          }}
-        >
-          [ Artist photo placeholder ]
-        </div>
+      {/* AFTER — real image */}
+<img
+  src="/images/artist/13.jpeg"   // ← your image file here
+  alt="The artist at work"
+  style={{
+    flex: '1 1 300px',
+    width: '100%',
+    maxWidth: '450px',
+    minHeight: '350px',
+    height: '400px',
+    objectFit: 'cover',
+    objectPosition: 'center',
+    borderRadius: '16px',
+    display: 'block',
+  }}
+/>
       </section>
 
 
@@ -168,23 +167,22 @@ export default function AboutPage() {
           </div>
 
           {/* Image placeholder */}
-          <div
-            style={{
-              flex: '1 1 300px',
-              minHeight: '350px',
-              backgroundColor: 'var(--color-sage)',
-              borderRadius: '16px',
-              opacity: 0.3,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontFamily: "'Inter', sans-serif",
-              color: 'var(--color-taupe)',
-              fontSize: '0.9rem',
-            }}
-          >
-            [ Close-up of dotting process ]
-          </div>
+        {/* AFTER */}
+<img
+  src="/images/artist/11.jpeg"   // ← close-up of dotting tools / process
+  alt="Close-up of the dot mandala painting process"
+  style={{
+    flex: '1 1 300px',
+    width: '100%',
+    maxWidth: '450px',
+    minHeight: '350px',
+    height: '400px',
+    objectFit: 'cover',
+    objectPosition: 'center',
+    borderRadius: '16px',
+    display: 'block',
+  }}
+/>
         </div>
       </section>
 
@@ -262,23 +260,22 @@ export default function AboutPage() {
         </div>
 
         {/* Image placeholder */}
-        <div
-          style={{
-            flex: '1 1 300px',
-            minHeight: '350px',
-            backgroundColor: 'var(--color-taupe)',
-            borderRadius: '16px',
-            opacity: 0.2,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontFamily: "'Inter', sans-serif",
-            color: 'var(--color-taupe)',
-            fontSize: '0.9rem',
-          }}
-        >
-          [ Artist portrait placeholder ]
-        </div>
+     {/* AFTER */}
+<img
+  src="/images/artist/12.jpeg"   // ← nice portrait of the artist
+  alt="Portrait of the Neerakriti artist"
+  style={{
+    flex: '1 1 300px',
+    width: '100%',
+    maxWidth: '450px',
+    minHeight: '350px',
+    height: '400px',
+    objectFit: 'cover',
+    objectPosition: 'top',    // 'top' keeps face visible if photo is tall
+    borderRadius: '16px',
+    display: 'block',
+  }}
+/>
       </section>
 
 
@@ -320,34 +317,28 @@ export default function AboutPage() {
               gap: '1.5rem',
             }}
           >
-            {[
-              'The workspace — tools, paints, plates',
-              'Mid-painting — dots taking shape',
-              'Dotting tools and colour palettes',
-              'A finished piece, ready to ship',
-            ].map((label, index) => (
-              <div
-                key={index}
-                style={{
-                  backgroundColor:
-                    index % 2 === 0 ? 'var(--color-sage)' : 'var(--color-rose)',
-                  // 👆 Alternates colours for visual variety
-                  opacity: 0.25,
-                  borderRadius: '12px',
-                  minHeight: '220px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '0.85rem',
-                  color: 'var(--color-taupe)',
-                  padding: '1rem',
-                  textAlign: 'center',
-                }}
-              >
-                [ {label} ]
-              </div>
-            ))}
+            {/* AFTER — real images in the grid */}
+{[
+  { src: '/images/aboutt/21.jpeg',  alt: 'The workspace — tools, paints, plates' },
+  { src: '/images/aboutt/22.jpeg',   alt: 'Mid-painting — dots taking shape' },
+  { src: '/images/aboutt/23.jpeg',      alt: 'Dotting tools and colour palettes' },
+  { src: '/images/aboutt/24.jpeg',   alt: 'A finished piece, ready to ship' },
+].map((photo, index) => (
+  <img
+    key={index}
+    src={photo.src}
+    alt={photo.alt}
+    style={{
+      width: '100%',
+      minHeight: '220px',
+      height: '260px',
+      objectFit: 'cover',
+      objectPosition: 'center',
+      borderRadius: '12px',
+      display: 'block',
+    }}
+  />
+))}
           </div>
 
           {/* CTA back to shop */}

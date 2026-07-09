@@ -10,13 +10,13 @@
 # ═══════════════════════════════════════════════════════════════════
 #
 # STEP 1 — Add your image to the right folder:
-#   neerakriti/public/images/<category-folder>/<image-name>.JPEG
-#   Example: neerakriti/public/images/diwali-tealights/diwali-tealight-8.JPEG
+#   neerakriti/public/images/<category-folder>/<image-name>.jpeg
+#   Example: neerakriti/public/images/diwali-tealights/diwali-tealight-8.jpeg
 #
 # STEP 2 — Add ONE entry to the PRODUCTS list below.
 #   Copy any nearby entry in the same category, then change:
 #     • "name"      → new product name
-#     • "images"    → ["/images/<folder>/<filename>.JPEG"]
+#     • "images"    → ["/images/<folder>/<filename>.jpeg"]
 #     • "createdAt" → today's date
 #   Everything else (description, careInstructions, etc.) can stay
 #   the same within a category or be tweaked as needed.
@@ -46,17 +46,17 @@
 # ═══════════════════════════════════════════════════════════════════
 #
 # Always use forward slashes, starting with /images/
-# Example: "/images/photo-frames/photo-frame-2.JPEG"
+# Example: "/images/photo-frames/photo-frame-2.jpeg"
 #
 # Next.js serves everything inside public/ as static files.
-# So public/images/photo-frames/photo-frame-2.JPEG
-# becomes the URL: /images/photo-frames/photo-frame-2.JPEG
+# So public/images/photo-frames/photo-frame-2.jpeg
+# becomes the URL: /images/photo-frames/photo-frame-2.jpeg
 # which is exactly what you store here.
 #
 # ⚠️  CASE SENSITIVE on Linux (production/Railway):
 #     The folder "Jharokha" must be written as "Jharokha" (capital J),
 #     not "jharokha" — match the actual folder name exactly.
-#     File extensions: .JPEG must be uppercase if that's how the file
+#     File extensions: .jpeg must be uppercase if that's how the file
 #     is saved. Check your actual filenames when adding new products.
 #
 # ═══════════════════════════════════════════════════════════════════
@@ -74,14 +74,14 @@ PRODUCTS = [
     # ───────────────────────────────────────────────────────────────
     # CATEGORY: Photo Frames  (₹1200 each, all isCustomizable)
     # Folder: neerakriti/public/images/photo-frames/
-    # To add Design 9 later: drop photo-frame-10.JPEG in this folder,
+    # To add Design 9 later: drop photo-frame-10.jpeg in this folder,
     # add an entry below with "category": "Photo Frames". Done.
     # ───────────────────────────────────────────────────────────────
     {
         "name": "Photo Frame — Design 1",
         "price": 1200,
         "description": "A custom dot mandala photo frame hand-painted around your favourite photograph. Send us any photo — family portrait, couple shot, or a solo picture — and we'll create a one-of-a-kind mandala border. Every piece is unique, just like your memories.",
-        "images": ["/images/photo-frames/photo-frame-2.JPEG"],
+        "images": ["/images/photo-frames/photo-frame-2.jpeg"],
         "category": "Photo Frames",
         "size": "10in",
         "tags": ["Best Seller", "Best Under Personalised Gifts"],
@@ -94,7 +94,7 @@ PRODUCTS = [
         "name": "Photo Frame — Design 2",
         "price": 1200,
         "description": "A custom dot mandala photo frame hand-painted around your favourite photograph. Send us any photo — family portrait, couple shot, or a solo picture — and we'll create a one-of-a-kind mandala border. Every piece is unique, just like your memories.",
-        "images": ["/images/photo-frames/photo-frame-3.JPEG"],
+        "images": ["/images/photo-frames/photo-frame-3.jpeg"],
         "category": "Photo Frames",
         "size": "10in",
         "tags": ["Best Under Personalised Gifts"],
@@ -107,7 +107,7 @@ PRODUCTS = [
         "name": "Photo Frame — Design 3",
         "price": 1200,
         "description": "A custom dot mandala photo frame hand-painted around your favourite photograph. Send us any photo — family portrait, couple shot, or a solo picture — and we'll create a one-of-a-kind mandala border. Every piece is unique, just like your memories.",
-        "images": ["/images/photo-frames/photo-frame-4.JPEG"],
+        "images": ["/images/photo-frames/photo-frame-4.jpeg"],
         "category": "Photo Frames",
         "size": "10in",
         "tags": ["Best Under Personalised Gifts"],
@@ -120,7 +120,7 @@ PRODUCTS = [
         "name": "Photo Frame — Design 4",
         "price": 1200,
         "description": "A custom dot mandala photo frame hand-painted around your favourite photograph. Send us any photo — family portrait, couple shot, or a solo picture — and we'll create a one-of-a-kind mandala border. Every piece is unique, just like your memories.",
-        "images": ["/images/photo-frames/photo-frame-5.JPEG"],
+        "images": ["/images/photo-frames/photo-frame-5.jpeg"],
         "category": "Photo Frames",
         "size": "10in",
         "tags": ["Best Under Personalised Gifts"],
@@ -133,7 +133,7 @@ PRODUCTS = [
         "name": "Photo Frame — Design 5",
         "price": 1200,
         "description": "A custom dot mandala photo frame hand-painted around your favourite photograph. Send us any photo — family portrait, couple shot, or a solo picture — and we'll create a one-of-a-kind mandala border. Every piece is unique, just like your memories.",
-        "images": ["/images/photo-frames/photo-frame-6.JPEG"],
+        "images": ["/images/photo-frames/photo-frame-6.jpeg"],
         "category": "Photo Frames",
         "size": "10in",
         "tags": ["Best Under Personalised Gifts"],
@@ -146,7 +146,7 @@ PRODUCTS = [
         "name": "Photo Frame — Design 6",
         "price": 1200,
         "description": "A custom dot mandala photo frame hand-painted around your favourite photograph. Send us any photo — family portrait, couple shot, or a solo picture — and we'll create a one-of-a-kind mandala border. Every piece is unique, just like your memories.",
-        "images": ["/images/photo-frames/photo-frame-7.JPEG"],
+        "images": ["/images/photo-frames/photo-frame-7.jpeg"],
         "category": "Photo Frames",
         "size": "10in",
         "tags": ["Best Under Personalised Gifts"],
@@ -159,7 +159,7 @@ PRODUCTS = [
         "name": "Photo Frame — Design 7",
         "price": 1200,
         "description": "A custom dot mandala photo frame hand-painted around your favourite photograph. Send us any photo — family portrait, couple shot, or a solo picture — and we'll create a one-of-a-kind mandala border. Every piece is unique, just like your memories.",
-        "images": ["/images/photo-frames/photo-frame-8.JPEG"],
+        "images": ["/images/photo-frames/photo-frame-8.jpeg"],
         "category": "Photo Frames",
         "size": "10in",
         "tags": ["Best Under Personalised Gifts"],
@@ -172,7 +172,7 @@ PRODUCTS = [
         "name": "Photo Frame — Design 8",
         "price": 1200,
         "description": "A custom dot mandala photo frame hand-painted around your favourite photograph. Send us any photo — family portrait, couple shot, or a solo picture — and we'll create a one-of-a-kind mandala border. Every piece is unique, just like your memories.",
-        "images": ["/images/photo-frames/photo-frame-9.JPEG"],
+        "images": ["/images/photo-frames/photo-frame-9.jpeg"],
         "category": "Photo Frames",
         "size": "10in",
         "tags": ["Best Under Personalised Gifts"],
@@ -190,7 +190,7 @@ PRODUCTS = [
         "name": "Jharokha — Design 1",
         "price": 1000,
         "description": "A handcrafted Jharokha (traditional Indian arch window frame) adorned with intricate dot mandala art. Inspired by the ornate window frames of Rajasthani palaces, this piece adds warmth and heritage to your home decor.",
-        "images": ["/images/jharokha/jharokha1.JPEG"],
+        "images": ["/images/jharokha/jharokha1.jpeg"],
         "category": "Jharokhas",
         "size": "12in",
         "tags": ["Best Seller"],
@@ -203,7 +203,7 @@ PRODUCTS = [
         "name": "Jharokha — Design 2",
         "price": 1000,
         "description": "A classic Jharokha wall panel adorned with vibrant dot mandala art. Inspired by the ornate window frames of Rajasthani palaces, this piece adds warmth and heritage to your home decor.",
-        "images": ["/images/jharokha/jharokha2.JPEG"],
+        "images": ["/images/jharokha/jharokha2.jpeg"],
         "category": "Jharokhas",
         "size": "12in",
         "tags": [],
@@ -216,16 +216,16 @@ PRODUCTS = [
     # ───────────────────────────────────────────────────────────────
     # CATEGORY: Tea Light Holders  (₹300 each)
     # Folder: neerakriti/public/images/diwali-tealights/
-    # Note: first image is diwali-tealight.JPEG (no number),
-    #       then diwali-tealight-2.JPEG through diwali-tealight-7.JPEG
-    # To add Design 8 later: save as diwali-tealight-8.JPEG,
+    # Note: first image is diwali-tealight.jpeg (no number),
+    #       then diwali-tealight-2.jpeg through diwali-tealight-7.jpeg
+    # To add Design 8 later: save as diwali-tealight-8.jpeg,
     # add entry below with "category": "Tea Light Holders". Done.
     # ───────────────────────────────────────────────────────────────
     {
         "name": "Diwali Tea Light Holder — Design 1",
         "price": 300,
         "description": "Hand-painted dot mandala tea light holder that doubles as festive rangoli art. Place a tea light candle inside and watch the colours glow. Perfect for Diwali decoration or as a thoughtful festive gift.",
-        "images": ["/images/diwali-tealights/diwali-tealight.JPEG"],
+        "images": ["/images/diwali-tealights/diwali-tealight.jpeg"],
         "category": "Tea Light Holders",
         "size": "4in",
         "tags": ["Diwali", "Best Seller"],
@@ -238,7 +238,7 @@ PRODUCTS = [
         "name": "Diwali Tea Light Holder — Design 2",
         "price": 300,
         "description": "Hand-painted dot mandala tea light holder that doubles as festive rangoli art. Place a tea light candle inside and watch the colours glow. Perfect for Diwali decoration or as a thoughtful festive gift.",
-        "images": ["/images/diwali-tealights/diwali-tealight-2.JPEG"],
+        "images": ["/images/diwali-tealights/diwali-tealight-2.jpeg"],
         "category": "Tea Light Holders",
         "size": "4in",
         "tags": ["Diwali"],
@@ -251,7 +251,7 @@ PRODUCTS = [
         "name": "Diwali Tea Light Holder — Design 3",
         "price": 300,
         "description": "Hand-painted dot mandala tea light holder that doubles as festive rangoli art. Place a tea light candle inside and watch the colours glow. Perfect for Diwali decoration or as a thoughtful festive gift.",
-        "images": ["/images/diwali-tealights/diwali-tealight-3.JPEG"],
+        "images": ["/images/diwali-tealights/diwali-tealight-3.jpeg"],
         "category": "Tea Light Holders",
         "size": "4in",
         "tags": ["Diwali"],
@@ -264,7 +264,7 @@ PRODUCTS = [
         "name": "Diwali Tea Light Holder — Design 4",
         "price": 300,
         "description": "Hand-painted dot mandala tea light holder that doubles as festive rangoli art. Place a tea light candle inside and watch the colours glow. Perfect for Diwali decoration or as a thoughtful festive gift.",
-        "images": ["/images/diwali-tealights/diwali-tealight-4.JPEG"],
+        "images": ["/images/diwali-tealights/diwali-tealight-4.jpeg"],
         "category": "Tea Light Holders",
         "size": "4in",
         "tags": ["Diwali"],
@@ -277,7 +277,7 @@ PRODUCTS = [
         "name": "Diwali Tea Light Holder — Design 5",
         "price": 300,
         "description": "Hand-painted dot mandala tea light holder that doubles as festive rangoli art. Place a tea light candle inside and watch the colours glow. Perfect for Diwali decoration or as a thoughtful festive gift.",
-        "images": ["/images/diwali-tealights/diwali-tealight-5.JPEG"],
+        "images": ["/images/diwali-tealights/diwali-tealight-5.jpeg"],
         "category": "Tea Light Holders",
         "size": "4in",
         "tags": ["Diwali"],
@@ -290,7 +290,7 @@ PRODUCTS = [
         "name": "Diwali Tea Light Holder — Design 6",
         "price": 300,
         "description": "Hand-painted dot mandala tea light holder that doubles as festive rangoli art. Place a tea light candle inside and watch the colours glow. Perfect for Diwali decoration or as a thoughtful festive gift.",
-        "images": ["/images/diwali-tealights/diwali-tealight-6.JPEG"],
+        "images": ["/images/diwali-tealights/diwali-tealight-6.jpeg"],
         "category": "Tea Light Holders",
         "size": "4in",
         "tags": ["Diwali"],
@@ -303,7 +303,7 @@ PRODUCTS = [
         "name": "Diwali Tea Light Holder — Design 7",
         "price": 300,
         "description": "Hand-painted dot mandala tea light holder that doubles as festive rangoli art. Place a tea light candle inside and watch the colours glow. Perfect for Diwali decoration or as a thoughtful festive gift.",
-        "images": ["/images/diwali-tealights/diwali-tealight-7.JPEG"],
+        "images": ["/images/diwali-tealights/diwali-tealight-7.jpeg"],
         "category": "Tea Light Holders",
         "size": "4in",
         "tags": ["Diwali"],
@@ -321,7 +321,7 @@ PRODUCTS = [
         "name": "Mandala Key Holder",
         "price": 500,
         "description": "A practical yet artistic key holder hand-painted with dot mandala patterns. Mount it near your door and never lose your keys again — all while adding a splash of handmade art to your entryway.",
-        "images": ["/images/keyholder/keyholder-1.JPEG"],
+        "images": ["/images/keyholder/keyholder-1.jpeg"],
         "category": "Key Holders",
         "size": "8in",
         "tags": ["Newly Added"],
@@ -334,13 +334,13 @@ PRODUCTS = [
     # ───────────────────────────────────────────────────────────────
     # CATEGORY: Coasters  (₹400 each)
     # Folder: neerakriti/public/images/coasters/
-    # Note: first image is coaster-set.JPEG, second is coaster-set-1.JPEG
+    # Note: first image is coaster-set.jpeg, second is coaster-set-1.jpeg
     # ───────────────────────────────────────────────────────────────
     {
         "name": "Mandala Coaster Set — Design 1",
         "price": 400,
         "description": "A set of hand-painted dot mandala coasters that protect your furniture in style. Each coaster features a unique mandala pattern in vibrant colours. Sealed with a protective coating to handle everyday use.",
-        "images": ["/images/coasters/coaset-set.JPEG"],
+        "images": ["/images/coasters/coaset-set.jpeg"],
         "category": "Coasters",
         "size": "4in",
         "tags": ["Newly Added"],
@@ -353,7 +353,7 @@ PRODUCTS = [
         "name": "Mandala Coaster Set — Design 2",
         "price": 400,
         "description": "A set of hand-painted dot mandala coasters that protect your furniture in style. Each coaster features a unique mandala pattern in vibrant colours. Sealed with a protective coating to handle everyday use.",
-        "images": ["/images/coasters/coaster-set-1.JPEG"],
+        "images": ["/images/coasters/coaster-set-1.jpeg"],
         "category": "Coasters",
         "size": "4in",
         "tags": [],
@@ -376,7 +376,7 @@ PRODUCTS = [
         "name": "Shree Laxmi Charan — Design 1",
         "price": 350,
         "description": "A hand-painted Shree Laxmi Charan (sacred footprints of Goddess Lakshmi) in dot mandala art. Traditionally placed at the entrance of homes during Diwali to welcome prosperity and good fortune.",
-        "images": ["/images/diwali-shreelaxmicharan/Diwali-ShreeLaxmiCharan-1.JPEG"],
+        "images": ["/images/diwali-shreelaxmicharan/Diwali-ShreeLaxmiCharan-1.jpeg"],
         "category": "Diwali Collection",
         "size": "6in",
         "tags": ["Diwali"],
@@ -389,7 +389,7 @@ PRODUCTS = [
         "name": "Shubh Labh Set — Design 1",
         "price": 300,
         "description": "A decorative Shubh Labh set hand-painted with dot mandala art. 'Shubh' means auspicious and 'Labh' means profit — traditionally hung on doors or walls during Diwali for blessings of prosperity.",
-        "images": ["/images/diwali-shubhlabh/Diwali-shubhlabh-1.JPEG"],
+        "images": ["/images/diwali-shubhlabh/Diwali-shubhlabh-1.jpeg"],
         "category": "Diwali Collection",
         "size": "6in",
         "tags": ["Diwali"],
@@ -402,7 +402,7 @@ PRODUCTS = [
         "name": "Shubh Labh Set — Design 2",
         "price": 300,
         "description": "A decorative Shubh Labh set hand-painted with dot mandala art. 'Shubh' means auspicious and 'Labh' means profit — traditionally hung on doors or walls during Diwali for blessings of prosperity.",
-        "images": ["/images/diwali-shubhlabh/Diwali-shubhlabh-2.JPEG"],
+        "images": ["/images/diwali-shubhlabh/Diwali-shubhlabh-2.jpeg"],
         "category": "Diwali Collection",
         "size": "6in",
         "tags": ["Diwali"],
@@ -415,7 +415,7 @@ PRODUCTS = [
         "name": "Shubh Labh Set — Design 3",
         "price": 300,
         "description": "A decorative Shubh Labh set hand-painted with dot mandala art. 'Shubh' means auspicious and 'Labh' means profit — traditionally hung on doors or walls during Diwali for blessings of prosperity.",
-        "images": ["/images/diwali-shubhlabh/Diwali-shubhlabh-3.JPEG"],
+        "images": ["/images/diwali-shubhlabh/Diwali-shubhlabh-3.jpeg"],
         "category": "Diwali Collection",
         "size": "6in",
         "tags": ["Diwali"],
@@ -435,7 +435,7 @@ PRODUCTS = [
         "name": "Wall Decor Swastik — Design 1",
         "price": 1200,
         "description": "A hand-painted dot mandala Swastik wall decor piece. The Swastik is one of the oldest and most auspicious symbols in Indian culture — rendered here in intricate dot work, it makes for a meaningful and beautiful addition to any home.",
-        "images": ["/images/wall-decors/wall-decor-1.JPEG"],
+        "images": ["/images/wall-decors/wall-decor-1.jpeg"],
         "category": "Wall Decor",
         "size": "12in",
         "tags": ["Best Seller"],
@@ -448,7 +448,7 @@ PRODUCTS = [
         "name": "Wall Decor Swastik — Design 2",
         "price": 1200,
         "description": "A hand-painted dot mandala Swastik wall decor piece. The Swastik is one of the oldest and most auspicious symbols in Indian culture — rendered here in intricate dot work, it makes for a meaningful and beautiful addition to any home.",
-        "images": ["/images/wall-decors/wall-decor-2.JPEG"],
+        "images": ["/images/wall-decors/wall-decor-2.jpeg"],
         "category": "Wall Decor",
         "size": "12in",
         "tags": ["Newly Added"],

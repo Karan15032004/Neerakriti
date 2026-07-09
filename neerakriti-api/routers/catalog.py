@@ -125,6 +125,22 @@ async def get_newly_added(limit: int = Query(4)):
 # .distinct("category") is a MongoDB command that returns every UNIQUE
 # value of the "category" field across all products — no duplicates.
 # Example: if 5 products are "Photo Frames", it returns "Photo Frames" once.
+# ---- Endpoint 4: Get products by tag ----
+# URL: GET /catalog/products/tag/Best+Seller
+#
+# A convenience endpoint — the frontend could also use
+# /catalog/products?tag=Best+Seller, but this is cleaner for
+# dedicated pages like "Best Sellers" or "Diwali Collection"
+
+@router.get("/products/tag/{tag_name}")
+async def get_products_by_tag(tag_name: str):
+    """Return all products that have a specific tag."""
+
+    # Same as the ?tag= filter above, but as a path parameter
+    cursor = products_collection.find({"tags": tag_name})
+    products = await cursor.to_list(length=100)
+
+    return [serialize_product(p) for p in products]
 
 @router.get("/categories")
 async def get_categories():
@@ -164,19 +180,3 @@ async def get_product_by_id(product_id: str):
     return serialize_product(product)
 
 
-# ---- Endpoint 4: Get products by tag ----
-# URL: GET /catalog/products/tag/Best+Seller
-#
-# A convenience endpoint — the frontend could also use
-# /catalog/products?tag=Best+Seller, but this is cleaner for
-# dedicated pages like "Best Sellers" or "Diwali Collection"
-
-@router.get("/products/tag/{tag_name}")
-async def get_products_by_tag(tag_name: str):
-    """Return all products that have a specific tag."""
-
-    # Same as the ?tag= filter above, but as a path parameter
-    cursor = products_collection.find({"tags": tag_name})
-    products = await cursor.to_list(length=100)
-
-    return [serialize_product(p) for p in products]
