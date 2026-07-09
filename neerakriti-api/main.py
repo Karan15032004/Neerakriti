@@ -39,5 +39,5 @@ app.include_router(engagement_router)   # /engagement/*
 async def health_check():
     return {
         "status": "running",
-        "phase": "2 — in-memory data, no MongoDB yet",
+        "phase": "Neerakriti API — Production",
     }
