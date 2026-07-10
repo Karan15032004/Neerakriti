@@ -402,7 +402,7 @@ PRODUCTS = [
         "name": "Shubh Labh Set — Design 2",
         "price": 300,
         "description": "A decorative Shubh Labh set hand-painted with dot mandala art. 'Shubh' means auspicious and 'Labh' means profit — traditionally hung on doors or walls during Diwali for blessings of prosperity.",
-        "images": ["/images/diwali-shubhlabh/Diwali-shubhlabh-2.jpeg"],
+        "images": ["/images/diwali-shubhlabh/diwali-shubhlabh-2.jpeg"],
         "category": "Diwali Collection",
         "size": "6in",
         "tags": ["Diwali"],
