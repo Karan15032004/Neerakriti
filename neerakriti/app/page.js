@@ -1,29 +1,20 @@
 // app/page.js
 // -----------
 // Homepage — a Server Component (runs on the server, not in the browser).
-// 
-// WHAT CHANGED IN PHASE 3:
-//   - Removed "import mockProducts" — we don't read from the local file anymore
-//   - All data now comes from the FastAPI backend via fetch()
-//   - URLs updated to match the actual catalog.py routes
-//   - All product.id changed to product._id (MongoDB's field name)
 import NotifyForm from './components/NotifyForm'
 import FeedbackForm from './components/FeedbackForm'
 import ProductCard from './components/ProductCard'
 import Link from 'next/link'
 import InstagramEmbed from './components/InstagramEmbed'
 
+// Strip any accidental trailing slash from the env var
+// so we never get double-slash URLs like //catalog/products/newly-added
+const API = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '')
 
 // ---- Data fetching functions ----
-// These run on the server before the page HTML is built.
-// Each one calls a different backend endpoint.
-// { cache: "no-store" } means "always get fresh data, don't cache"
-// The try/catch means if the backend is down, we show an empty section
-// instead of crashing the whole page.
-
 async function getNewlyAdded() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/catalog/products/newly-added?limit=4`, {
+    const res = await fetch(`${API}/catalog/products/newly-added?limit=4`, {
       cache: "no-store",
     });
     if (!res.ok) return [];
@@ -35,7 +26,7 @@ async function getNewlyAdded() {
 
 async function getBestSellers() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/catalog/products/tag/Best%20Seller`, {
+    const res = await fetch(`${API}/catalog/products/tag/Best%20Seller`, {
       cache: "no-store",
     });
     if (!res.ok) return [];
@@ -45,9 +36,7 @@ async function getBestSellers() {
   }
 }
 
-
 export default async function HomePage() {
-  // Fetch data from the backend — these run in parallel on the server
   const newlyAdded = await getNewlyAdded();
   const bestSellers = await getBestSellers();
 
@@ -65,7 +54,6 @@ export default async function HomePage() {
           className="w-half max-w-4xl rounded-2xl mb-10"
           style={{ objectFit: 'cover', maxHeight: '450px', width: '100%' }}
         />
-
         <h1 className="text-4xl md:text-6xl font-bold mb-4" style={{ color: 'var(--ink)' }}>
           Handmade Dot Mandala Art
         </h1>
@@ -102,7 +90,7 @@ export default async function HomePage() {
           <h1 className="text-3xl font-bold" style={{ color: 'var(--ink)' }}>
             Newly Added
           </h1>
-          <Link href="/products" className="text-sm underline" style={{ color: 'var(--accent)',textDecoration: 'none' }}>
+          <Link href="/products" className="text-sm" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
             View all →
           </Link>
         </div>
@@ -122,7 +110,7 @@ export default async function HomePage() {
           <h1 className="text-3xl font-bold" style={{ color: 'var(--ink)' }}>
             Best Sellers
           </h1>
-          <Link href="/products?tag=Best+Seller" className="text-sm underline" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
+          <Link href="/products?tag=Best+Seller" className="text-sm" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
             View all →
           </Link>
         </div>
@@ -146,7 +134,7 @@ export default async function HomePage() {
         </p>
         <Link
           href="/products?tag=Diwali"
-          className="px-8 py-3 font-semibold hover:opacity-90 transition-opacity textDecoration-none"
+          className="px-8 py-3 font-semibold hover:opacity-90 transition-opacity"
           style={{ backgroundColor: 'white', color: 'var(--rose)' }}
         >
           Shop Festive Gifts
@@ -167,52 +155,39 @@ export default async function HomePage() {
           </p>
           <Link
             href="/about"
-            className="font-semibold underline"
-            style={{ color: 'var(--ink)',textDecoration: 'none' }}
+            className="font-semibold"
+            style={{ color: 'var(--ink)', textDecoration: 'none' }}
           >
             Read the full story →
           </Link>
         </div>
-
-{/* Before: single image div */}
-{/* <div className="flex-1 max-w-sm w-full"> ... </div> */}
-
-{/* After: two images side by side */}
-{/* Two maker photos — width-driven sizing, no height constraint, no cropping */}
-<div style={{ flex: '0 0 42%', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-
-  {/* Photo 1 */}
-  <img
-    src="/images/maker.jpeg"
-    alt="The maker — Neerakriti artist"
-    style={{
-      width: 'calc(50% - 5px)',   /* exactly half the container minus half the gap */
-      height: 'auto',             /* maintains natural aspect ratio — no cropping */
-      borderRadius: '14px',
-      display: 'block',           /* removes the ghost whitespace below inline images */
-      boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
-      objectFit: 'unset',         /* not needed since height is auto, but explicit is clean */
-    }}
-  />
-<img
-    src="/images/maker3.jpeg"
-    alt="The maker at the seaside"
-    style={{
-      width: 'calc(50% - 5px)',   /* same as photo 1 — guaranteed equal width */
-      height: 'auto',             /* scales proportionally — fully visible, no scroll */
-      borderRadius: '14px',
-      display: 'block',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
-      objectFit: 'unset', 
-    }}
-  />
- 
-
-</div>
+        <div style={{ flex: '0 0 42%', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+          <img
+            src="/images/maker.jpeg"
+            alt="The maker — Neerakriti artist"
+            style={{
+              width: 'calc(50% - 5px)',
+              height: 'auto',
+              borderRadius: '14px',
+              display: 'block',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
+            }}
+          />
+          <img
+            src="/images/maker3.jpeg"
+            alt="The maker at the seaside"
+            style={{
+              width: 'calc(50% - 5px)',
+              height: 'auto',
+              borderRadius: '14px',
+              display: 'block',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
+            }}
+          />
+        </div>
       </section>
 
-      {/* ── 7. INSTAGRAM PLACEHOLDER ───────────────────── */}
-   {/* ── 7. INSTAGRAM FEED ──────────────────────────── */}
+      {/* ── 7. INSTAGRAM FEED ──────────────────────────── */}
       <section
         className="px-6 md:px-16 py-14"
         style={{ backgroundColor: 'var(--card-bg)' }}
@@ -220,7 +195,6 @@ export default async function HomePage() {
         <InstagramEmbed />
       </section>
 
-      {/* ── 8. NOTIFY ME ───────────────────────────────── */}
       {/* ── 8. NOTIFY ME SIGNUP ── */}
       <section
         style={{
@@ -230,7 +204,8 @@ export default async function HomePage() {
       >
         <NotifyForm />
       </section>
-        {/* ── 9. FEEDBACK FORM ── */}
+
+      {/* ── 9. FEEDBACK FORM ── */}
       <section
         style={{
           padding: '4rem 2rem',
