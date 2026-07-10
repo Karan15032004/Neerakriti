@@ -29,13 +29,39 @@ export default function Navbar() {
           padding: '0.75rem 1.5rem',
         }}
       >
-        {/* Logo */}
-        <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
+        {/* ── Logo + Brand Name stacked vertically ── */}
+        <Link
+          href="/"
+          style={{
+            textDecoration: 'none',
+            flexShrink: 0,
+            display: 'flex',          // stack logo and name vertically
+            flexDirection: 'column',
+            alignItems: 'center',     // center both horizontally
+          }}
+        >
+          {/* The circular logo image */}
           <img
             src="/images/logo-removebg.png"
             alt="Neerakriti"
-            style={{ height: '60px', width: 'auto', objectFit: 'contain' }}
+            style={{ height: '52px', width: 'auto', objectFit: 'contain' }}
           />
+
+          {/* Brand name in Cormorant Garamond — matches the logo text exactly */}
+          <span
+            style={{
+              fontFamily: "'Cormorant Garamond', serif", // your brand heading font
+              fontWeight: 2000,          // light weight — same thin strokes as the logo text
+              fontSize: '0.6rem',       // small, sits neatly below the logo without competing
+              letterSpacing: '0.35em',  // very wide spacing — the defining feature of the logo text
+              textTransform: 'uppercase',
+              color: '#7A6354',         // taupe — matches the logo ink color directly
+              marginTop: '3px',         // small gap between logo circle and text
+              lineHeight: 1,
+            }}
+          >
+            Neerakriti
+          </span>
         </Link>
 
         {/* Desktop nav links — hidden on mobile */}
