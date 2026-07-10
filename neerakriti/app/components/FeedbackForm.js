@@ -1,3 +1,4 @@
+// app/components/FeedbackForm.js
 'use client';
 
 import { useState } from 'react';
@@ -15,8 +16,7 @@ export default function FeedbackForm() {
     setStatus('');
 
     try {
-      // ✅
-const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, message }),
@@ -27,21 +27,16 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
         setName('');
         setEmail('');
         setMessage('');
-      // ✅ FIXED
-} else {
-  const data = await res.json();
-
-  // FastAPI's data.detail is EITHER a plain string OR an array of
-  // validation error objects [{type, loc, msg, input}, ...]
-  // React crashes if you try to render an object — so we always extract a string
-  if (typeof data.detail === 'string') {
-    setStatus(data.detail);
-  } else if (Array.isArray(data.detail)) {
-    setStatus(data.detail.map((err) => err.msg).join(', '));
-  } else {
-    setStatus('Something went wrong. Please try again.');
-  }
-}
+      } else {
+        const data = await res.json();
+        if (typeof data.detail === 'string') {
+          setStatus(data.detail);
+        } else if (Array.isArray(data.detail)) {
+          setStatus(data.detail.map((err) => err.msg).join(', '));
+        } else {
+          setStatus('Something went wrong. Please try again.');
+        }
+      }
     } catch (error) {
       setStatus('Could not connect to the server. Please try again later.');
     } finally {
@@ -49,29 +44,38 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
     }
   };
 
+  // ─────────────────────────────────────────────────────────────────
+  // WHY HARDCODED COLORS HERE?
+  // The card background is always white (#FFFFFF), in BOTH light and
+  // dark mode. So we can't use CSS variables like var(--color-taupe)
+  // for text — in dark mode, --color-taupe resolves to a light cream
+  // color, which becomes invisible against the white card.
+  //
+  // Fix: use fixed hex values that always contrast against white.
+  //   #5C4A3A = dark taupe (always readable on white)
+  //   #C99B89 = rose (border accent — soft but visible on white)
+  //   #4A7A5A = dark sage (success message — readable on white)
+  //   #c0392b = red (error — always readable)
+  // ─────────────────────────────────────────────────────────────────
+
   return (
     <div
       style={{
         maxWidth: '520px',
         margin: '0 auto',
-        backgroundColor: 'white',
-        // 👆 White card sitting ON TOP of the cream page background
-        // This creates contrast — the form "pops" visually
+        backgroundColor: '#FFFFFF',       // ← always white card
         borderRadius: '16px',
         padding: '2.5rem 2rem',
-        boxShadow: '0 2px 12px rgba(0, 0, 0, 0.06)',
-        // 👆 Subtle shadow gives the card a "floating" feel
+        boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
       }}
     >
       <h3
         style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontSize: '2rem',
-          // 👆 Bigger than before (was 1.75rem)
           fontWeight: '700',
-          // 👆 Bold — makes the heading stand out
-          color: 'var(--color-taupe)',
-          marginBottom: '1.5rem',
+          color: '#5C4A3A',               // ← FIXED dark taupe, not var(--color-taupe)
+          marginBottom: '1.5rem',         //   because var(--color-taupe) is LIGHT in dark mode
           textAlign: 'center',
         }}
       >
@@ -91,7 +95,7 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
               marginBottom: '0.4rem',
               fontSize: '0.9rem',
               fontWeight: '600',
-              color: 'var(--color-taupe)',
+              color: '#5C4A3A',           // ← FIXED: always dark on white card
               fontFamily: "'Inter', sans-serif",
             }}
           >
@@ -107,18 +111,14 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
             style={{
               width: '100%',
               padding: '0.8rem 1rem',
-              border: '1.5px solid var(--color-rose)',
-              // 👆 Rose border — visible against white background
+              border: '1.5px solid #C99B89',  // ← FIXED rose border
               borderRadius: '10px',
               backgroundColor: '#FFFFFF',
-              // 👆 Pure white — clearly distinct from the card and page
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.95rem',
-              color: 'var(--color-taupe)',
+              color: '#5C4A3A',               // ← FIXED: typed text is dark
               outline: 'none',
               boxSizing: 'border-box',
-              // 👆 Makes padding included in width calculation
-              // Without this, 100% width + padding = wider than container
             }}
           />
         </div>
@@ -132,7 +132,7 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
               marginBottom: '0.4rem',
               fontSize: '0.9rem',
               fontWeight: '600',
-              color: 'var(--color-taupe)',
+              color: '#5C4A3A',           // ← FIXED
               fontFamily: "'Inter', sans-serif",
             }}
           >
@@ -148,12 +148,12 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
             style={{
               width: '100%',
               padding: '0.8rem 1rem',
-              border: '1.5px solid var(--color-rose)',
+              border: '1.5px solid #C99B89',
               borderRadius: '10px',
               backgroundColor: '#FFFFFF',
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.95rem',
-              color: 'var(--color-taupe)',
+              color: '#5C4A3A',           // ← FIXED
               outline: 'none',
               boxSizing: 'border-box',
             }}
@@ -169,7 +169,7 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
               marginBottom: '0.4rem',
               fontSize: '0.9rem',
               fontWeight: '600',
-              color: 'var(--color-taupe)',
+              color: '#5C4A3A',           // ← FIXED
               fontFamily: "'Inter', sans-serif",
             }}
           >
@@ -185,12 +185,12 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
             style={{
               width: '100%',
               padding: '0.8rem 1rem',
-              border: '1.5px solid var(--color-rose)',
+              border: '1.5px solid #C99B89',
               borderRadius: '10px',
               backgroundColor: '#FFFFFF',
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.95rem',
-              color: 'var(--color-taupe)',
+              color: '#5C4A3A',           // ← FIXED: typed text is dark
               outline: 'none',
               resize: 'vertical',
               boxSizing: 'border-box',
@@ -204,16 +204,20 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
           disabled={sending}
           style={{
             padding: '0.85rem 2.5rem',
-            backgroundColor: sending ? '#a89585' : 'var(--color-taupe)',
-            color: '#FFFFFF',
-            // 👆 White text on taupe background — high contrast
+            // ─────────────────────────────────────────────────────
+            // THE MAIN FIX FOR THE WASHED-OUT BUTTON:
+            // Before: backgroundColor was 'var(--color-taupe)' which
+            // in dark mode = a light cream → white text on light bg = invisible
+            // After: hardcoded '#5C4A3A' (dark taupe) always gives
+            // strong contrast with white text, in BOTH modes
+            // ─────────────────────────────────────────────────────
+            backgroundColor: sending ? '#A08070' : '#5C4A3A',
+            color: '#FFFFFF',             // white text on dark button — always readable
             border: 'none',
             borderRadius: '10px',
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: '1.2rem',
-            // 👆 Bigger than before (was 1.1rem)
             fontWeight: '700',
-            // 👆 Bold
             cursor: sending ? 'not-allowed' : 'pointer',
             transition: 'background-color 0.2s ease',
             alignSelf: 'center',
@@ -229,7 +233,8 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/engagement/feedback`
             style={{
               textAlign: 'center',
               fontSize: '0.95rem',
-              color: status.includes('Thank you') ? 'var(--color-sage)' : '#c0392b',
+              // success = dark sage, error = red — both readable on white
+              color: status.includes('Thank you') ? '#4A7A5A' : '#c0392b',
               marginTop: '0.25rem',
               fontFamily: "'Inter', sans-serif",
             }}
